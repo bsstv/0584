@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script src="https://bsstv.github.io/0584/clpr/min.js"></script>
+    <script src="https://bsstv.github.io/0584/clpr/dsh.js"></script>
+   <script type="text/javascript" src="https://bsstv.github.io/0584/clpr/ctrl.js"></script>
+
+  </head>
+
+  <body>
+    <div id="player"></div>
+    <script>
+   const clappr = new Clappr.Player({
+  source: "https://linearjitp-playback.astro.com.my/dash-wv/linear/2304/default_ott.mpd",
+  poster: "/player/cvr.jpg",
+  autoPlay: false,
+  disableErrorScreen: true,
+  width: "100%",
+  parentId: "#player",
+  plugins: [
+    MediaControl.MainPlugin,
+    MediaControl.PlayPauseButtonPlugin,
+    MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,
+    MediaControl.LevelSelectorPlugin,   
+    DashShakaPlayback,   
+    ],
+  shakaConfiguration: {
+            drm: {
+                clearKeys: {
+                                'a098896d2b11c5f3906a993c3ba5c610': 'f3f842c54cc96cbbd0bcb96a4cb8a813'
+
+                }},
+            preferredAudioLanguage: 'pt-BR',
+            streaming: {
+              rebufferingGoal: 15
+            }
+          },
+  
+  controls: true,
+  events: {
+    onError: function(e) {
+      setTimeout(function() {
+        clappr.configure({
+          autoPlay: true,
+          source: "/sorry.mp4",
+        });
+      }, 1000);
+    },
+  },
+});
+clappr.getPlugin('spinner').enable();
+window.player = clappr;   
+    </script>
+  </body>
+</html>
