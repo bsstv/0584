@@ -4,14 +4,13 @@
     <script src="https://bsstv.github.io/0584/clpr/dsh.js"></script>
    <script type="text/javascript" src="https://bsstv.github.io/0584/clpr/ctrl.js"></script>
     <style type="text/css">
-      body{margin:0}#LiveTv {
+  body{margin:0}#LiveTv {
   position: relative;
   padding-top:56.25%;
   height: 0;z-index:2;
-  width: 100%;box-shadow:0 5px 14px 0 #302c2c59
-}
+  width: 100%}
 [data-player] {
-  position: absolute;
+  position: absolute !important;
   top: 0;
   left: 0;
   width: 100% !important;
@@ -19,21 +18,12 @@
 }
 .fullscreen-button{margin-right:10px !important}
 .play-pause-button{margin-left:10px !important}
-.player-poster[data-poster] .play-wrapper[data-poster] svg path {
-    fill: #D2E00F;
-}.spinner-three-bounce[data-spinner] > div {background:#D2E00F}
-.poster-icon{ -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
-  filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7)); }
+.player-poster[data-poster] .play-wrapper[data-poster] svg path {fill: #D2E00F;}.spinner-three-bounce[data-spinner] > div {background:#D2E00F}
+.poster-icon{ -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7)); }
 .seek-bar[type=range]::before{background-color:rgb(210, 224, 15) !important}
-.media-control .media-control__elements--push-row {margin-right: 10px;
-}
-
-.vcontainer {
-	width: 100%;
-}
-video {
-	width: 100%;
-}
+.media-control .media-control__elements--push-row {margin-right: 10px;}
+.vcontainer {width: 100%;}
+video {width: 100%;}
 </style>
   </head>
 
