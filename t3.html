@@ -1,0 +1,71 @@
+<script src='https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js'></script>
+
+
+   <div style="aspect-ratio: 16/9">
+      <div id="player" style="width: 100%; height: 100%;"></div>
+   </div>
+
+
+<script>
+    var player = new Clappr.Player({
+        source: "https://live-ssar-02.tonton.com.my/1747959294/0x023ae54c782d246d781e82b0213d4c6ee020c6b176ba4553ecb7a2e81e53ff94/stream-tv3/master_1080.m3u8?bpkio_serviceid=6c0958d82a830a02ca0936d9cfab8311&bpkio_sessionid=10a3a5c101-c564c2c9-2c53-4678-a29f-ff4c83f511c6&category=all&did=021521f0-e762-9d6b-a593-b4c3d524c6af&dnt=0&ifatype=sessionid&lot_auds=ca_288,ca_422,ca_419,ca_330,ca_773,ca_803,ca_290,ca_686,ca_688,ca_1096,ca_305,ca_361,ca_392,ca_420,ca_724,ca_1010,ca_460,ca_630,ca_758,ca_381,ca_786,ca_384,ca_446,ca_1040,ca_441,ca_390,ca_036,ca_365,ca_168,ca_730,ca_672,ca_394,ca_024,ca_972,ca_775,ca_778,ca_364,ca_797,ca_215,ca_403,ca_897,all,ca_1034,ca_1047,ca_1056,ca_675,ca_1035,ca_1101,ca_380,ca_378,ca_977,ca_760,,ca_790,ca_950&mm_sp&plt=web&ttd_uid2=A4AAABIonOAXNAfMYb70j6QhY-pMhq3458ScpjIHoP01QjBaobykCHhkP9o7JXtZZkwa6yN5_ugyIpmXudkwgPNu60_dDs2ahbfqXloZohPKO6B7TBkSggw8_s2wMRxBrxiscULWHlmAfnu62Hap_gYhWsGuOLvEluNLvSpPy4a9rvMqHt4ggZvlND9-IIIWIeriAj0JZRzvL6mcPdte1Ydb1A", // Sumber default
+        plugins: { playback: [DashShakaPlayback] },
+        parentId: "#player",
+        width: "100%",
+        height: "100%",
+        autoPlay: true,
+        poster: "",
+        shakaConfiguration: {
+            drm: {
+                clearKeys: {
+                    // Tambahkan kunci ClearKey Anda di sini
+                 '22489b3a6322ce3a811f313c47f3d842': '3579e944fc146d9d3702f419c53fb55d',
+                 '7de0fa3c35f52f8a8517f1600dd11ed7': '2d59cf94d10020aeee01a97cd0716eea',
+                 'e60ece8f0d9042fcb52508055ec48e5e': '213f438bd4961cda987d41b7f154f1e5',
+                 'e6ed3fdf6e9f491d9ead109fc0b00cfc': '3bc6c45722eb5fa7b343de9bffc4f7c7'
+                }
+            }
+        }
+    });
+
+  var fallbackSource = "https://linearjitp-playback.astro.com.my/dash-wv/linear/809/default_primary.mpd"; // Sumber fallback
+   // var fallbackSource = "https://cdn-cf-east.streamable.com/video/mp4/n9h1w1.mp4?Expires=1725509180205&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ&Signature=LVJCDQanhYiY6tDkbKFDVKWUcXDSKFSsq0Bt15apW0Nlu5o7Exb5lkPcGLCfR1tArrTUUWA9wY43rAXyzoMtTi1IgjaIdOPPXsEqZF7vQh2r75AyKL5Q5XdyN84Shp4AdWFps0~3p0QR1DJaWY2aaAC8SMCnMXJJq10mtVMYoLCElZw3pdpkHXmaCs4~MUa2fmXjrYMzOt35lUZSnFke~0wsH-5luFHlVsejWEmWSxIN8xgL8PHAgnoWDy1I1QcKsHA5LAahmQ-zX4wCKfhTgVlH~EZBxtyYDuaNdqmTWwSYNRyjIwNw6dXuWe4So7KKVCck2RjB3E-IjNu0CwNEvg__"; // Sumber fallback
+
+    player.on(Clappr.Events.PLAYER_ERROR, function() {
+        // Jika terjadi kesalahan, muat sumber fallback
+        player.load(fallbackSource);
+    });
+
+    document.querySelectorAll('.channel').forEach(function(channel) {
+        channel.addEventListener('click', function() {
+            var source = this.getAttribute('data-value');
+            var fallback = this.getAttribute('data-fallback');
+            player.load(source);
+
+            player.once(Clappr.Events.PLAYER_ERROR, function() {
+                // Jika terjadi kesalahan, muat sumber fallback
+                player.load(fallback);
+            });
+        });
+    });
+
+    function onFullScreenChange() {
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+            // Memasuki mode layar penuh
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock('landscape');
+            }
+        } else {
+            // Keluar dari mode layar penuh
+            if (screen.orientation && screen.orientation.unlock) {
+                screen.orientation.unlock();
+            }
+        }
+    }
+
+    document.addEventListener('fullscreenchange', onFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullScreenChange);
+    document.addEventListener('mozfullscreenchange', onFullScreenChange);
+    document.addEventListener('MSFullscreenChange', onFullScreenChange);
+</script>
