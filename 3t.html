@@ -44,14 +44,12 @@ video {
 <body>
 <div id="M3UH" class="ct-code-block" ><div id="bossmov"></div>
 <script type="text/javascript">
- fetch("https://api.npoint.io/ac2a00d5557a8e2c315a")
-.then(res => res.json())
-.then(data => { const player = new Clappr.Player(
+fetch("https://api.npoint.io/ac2a00d5557a8e2c315a").then(res => res.json()).then(data => { const player = new Clappr.Player(
                 source: data.link,
                 mimeType: "application/x-mpegURL",
                 autoPlay: true,
                 width: "100%",
-                plugins: { core: [MediaControl.MainPlugin,MediaControl.PlayPauseButtonPlugin,MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,MediaControl.LevelSelectorPlugin,] },
+                plugins: { core: [] },
                 parentId: "#bossmov"});
                   })
                  .catch(err => {
