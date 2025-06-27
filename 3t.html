@@ -39,18 +39,25 @@ video {
 }
 </style>
 <script type="text/javascript" src="clpr/min.js"></script>
-<script type="text/javascript" src="clpr/ctrl.js"></script>	
+<script type="text/javascript" src="clpr/ctrl.js"></script>
+<script src="https://cdn.jsdelivr.net/clappr.level-selector/latest/level-selector.min.js">
+			</script>	
 </head>
 <body>
 <div id="M3UH" class="ct-code-block" ><div id="bossmov"></div>
 <script type="text/javascript">
-fetch("https://api.npoint.io/ac2a00d5557a8e2c315a").then(res => res.json()).then(data => { const player = new Clappr.Player(
-                source: data.link,
-                mimeType: "application/x-mpegURL",
-                autoPlay: true,
-                width: "100%",
-                plugins: { core: [] },
-                parentId: "#bossmov"});
+fetch("https://api.npoint.io/ac2a00d5557a8e2c315a") // ganti dgn link npoint sebenar
+					.then(res => res.json())
+                    .then(data => {
+                    const player = new Clappr.Player({
+                    source: data.link,
+                    mimeType: "application/x-mpegURL",
+                   autoPlay: true,
+                   width: "950",
+                   height: "700",
+                   plugins: { core: [LevelSelector] },
+                  parentId: "#bossmov"
+                  });
                   })
                  .catch(err => {
                  alert("Gagal load stream: " + err);
