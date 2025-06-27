@@ -44,36 +44,23 @@ video {
 <body>
 <div id="M3UH" class="ct-code-block" ><div id="bossmov"></div>
 <script type="text/javascript">
-  fetch("https://api.npoint.io/ac2a00d5557a8e2c315a") // ganti dgn link npoint sebenar
+ fetch("https://api.npoint.io/ac2a00d5557a8e2c315a") // ganti dgn link npoint sebenar
 					.then(res => res.json())
                     .then(data => {
-  const clappr = new Clappr.Player({
-  source: data.link,
-  poster: "player/cvr.jpg",
-  autoPlay: false,
-  disableErrorScreen: true,
-  width: "100%",
-  parentId: "#bossmov",
-  plugins: [
-    MediaControl.MainPlugin,
-    MediaControl.PlayPauseButtonPlugin,
-    MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,
-    MediaControl.LevelSelectorPlugin],
-  
-  controls: true,
-  events: {
-    onError: function(e) {
-      setTimeout(function() {
-        clappr.configure({
-          autoPlay: true,
-          source: "player/sorry.mp4",
-        });
-      }, 1000);
-    },
-  },
-});
+                    const player = new Clappr.Player({
+                    source: data.link,
+                    mimeType: "application/x-mpegURL",
+                   autoPlay: true,
+                   width: "950",
+                   height: "700",
+                   plugins: { core: [LevelSelector] },
+                  parentId: "#vid"
+                  });
+                  })
+                 .catch(err => {
+                 alert("Gagal load stream: " + err);
+                 });
 clappr.getPlugin('spinner').enable();
 window.player = clappr;}</script>
-<script>document.addEventListener("contextmenu", (event) => {event.preventDefault();});</script>
 </body>
 </html>
