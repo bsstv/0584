@@ -55,7 +55,10 @@ fetch("https://api.npoint.io/ac2a00d5557a8e2c315a") // ganti dgn link npoint seb
                    autoPlay: true,
                    width: "950",
                    height: "700",
-                   plugins: { core: [LevelSelector] },
+                   plugins: { core: [MediaControl.MainPlugin,
+    MediaControl.PlayPauseButtonPlugin,
+    MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,
+    MediaControl.LevelSelectorPlugin,] },
                   parentId: "#bossmov"
                   });
                   })
