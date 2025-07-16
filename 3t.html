@@ -45,17 +45,45 @@ video {
 <body>
 <div id="M3UH" class="ct-code-block" ><div id="bossmov"></div>
 <script type="text/javascript">
-fetch("https://api.npoint.io/d32b858b0a39930a2e6e").then(res => res.json()).then(data => {
- const player = new Clappr.Player({
- source: data.link,
- mimeType: "application/x-mpegURL",
- autoPlay: true,
- width: "100%",
- plugins: { core: [MediaControl.MainPlugin,MediaControl.PlayPauseButtonPlugin,MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,MediaControl.LevelSelectorPlugin,] },
- parentId: "#bossmov"});
- })
- .catch(err => {
- alert("Please wait and refresh the page. Than You.: " + err);
- });</script>
+fetch("https://api.npoint.io/ac2a00d5557a8e2c315a") // ganti dgn link npoint sebenar
+					.then(res => res.json())
+                    .then(data => {
+const clappr = new Clappr.Player({
+  source: data.link,
+  poster: "/player/cvr.jpg",
+  autoPlay: true,
+  disableErrorScreen: true,
+  width: "100%",
+  parentId: "#bossmov",
+  plugins: [
+    MediaControl.MainPlugin,
+    MediaControl.PlayPauseButtonPlugin,
+    MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,
+    MediaControl.LevelSelectorPlugin,   
+    DashShakaPlayback,   
+    ],
+  shakaConfiguration: {
+            preferredAudioLanguage: 'pt-BR',
+            streaming: {
+              rebufferingGoal: 15
+            }
+          },
+  
+  controls: true,
+  events: {
+    onError: function(e) {
+      setTimeout(function() {
+        clappr.configure({
+          autoPlay: true,
+          source: "//iptv.bosstv.top/player/default.mp4",
+        });
+      }, 1000);
+    },
+  },
+});
+clappr.getPlugin('spinner').enable();
+window.player = clappr;	
+		    }
+</script>
 </body>
 </html>
