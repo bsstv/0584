@@ -59,15 +59,8 @@ const clappr = new Clappr.Player({
     MediaControl.MainPlugin,
     MediaControl.PlayPauseButtonPlugin,
     MediaControl.SeekBarPlugin,MediaControl.FullscreenButtonPlugin,
-    MediaControl.LevelSelectorPlugin,  
+    MediaControl.LevelSelectorPlugin
     ],
-  shakaConfiguration: {
-            preferredAudioLanguage: 'pt-BR',
-            streaming: {
-              rebufferingGoal: 15
-            }
-          },
-  
   controls: true,
   events: {
     onError: function(e) {
